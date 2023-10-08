@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+    <div class="px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl p-4 text-center tracking-wide bg-pink-300 font-medium shadow-lg">My Items</h2>
+        {% if not items %}
+            <div class="p-6 text-xl font-medium text-center">You Don't Have Any Items For Sale.</div>
+        {% endif %}
+        <div class="grid gap-x-6 gap-y-8 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 max-h-screen overflow-y-auto">
+            {% for item in items %}
+                <div class="drop-shadow-xl rounded-xl text-center border-4 border-transparent hover:border-4 hover:border-pink-400 hover:rounded-xl">
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div>
+                            <img src="{{ item.image.url}}" class="rounded-t-xl object-scale-down h-96 w-96 border">
+                        </div>
+                        <div class="px-6 pt-6 bg-teal-100">
+                            <h2 class="text-2xl"> {{item.name}} </h2>
+                            <p class="text-gray-500 font-medium text-lg"> ₹ {{item.price}} </p>
+                        </div>
+                        {% if item.is_sold %}
+                            <div class="absolute inset-0 bg-gray-700 bg-opacity-75 rounded-xl text-center">
+                                <img src="{% static 'sold_out.png' %}" alt="Sold Out" class="p-12 h-full w-full object-scale-down">
+                            </div>
+                            
+                            <!-- <div class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75 text-white text-lg rounded-xl font-semibold">
+                            Sold Out
+                            </div> -->
+                      {% endif %}
+                    </a>
+                    <div class="pb-6 rounded-b-xl space-x-2 bg-teal-100">
+                        <a href="{% url 'item:edit_item' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
+                        <a href="{% url 'item:delete_item' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
+                    </div>
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact Seller {% endblock %}
+
+{% block content %}
+<div class="min-h-screen">
+    <h1 class="my-6 mx-12 text-3xl">Contact {{ item.created_by }}</h1>
+    <form class="my-6 mx-12 p-8 bg-gray-200 rounded-xl" method="post" action="{% url 'chat:new' item_id %}">
+        {% csrf_token %}
+        <div class="space-y-4">
+            {{ form.as_p }}
+        </div>
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <button class="my-6 py-4 px-8 text-lg bg-teal-500 rounded-xl text-white hover:bg-teal-700">Send</button>
+    </form>
+</div>
+{% endblock %}

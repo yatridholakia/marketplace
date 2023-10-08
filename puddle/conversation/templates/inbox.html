@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Inbox {% endblock %}
+
+{% block content %}
+
+<div class="p-4 flex flex-col flex-wrap min-h-screen gap-3 overflow-y-auto">
+    <h1 class="my-6 mx-5 text-3xl">My Chats</h1>
+    {% for chat in chats %}
+        <a href="{% url 'chat:chat' chat.id %}">
+            <div class="p-6 flex bg-gray-200 rounded-xl h-36">
+                <div class="pr-6">
+                    <img src="{{ chat.item.image.url }}" class="w-20 rounded-xl"/>
+                </div>
+
+                <div>
+                    {% for member in chat.members.all %}
+                        {% if member != request.user %}
+                            <p class="mb-4"><strong>{{ member.username }}</strong> | {{ chat.modified_at }}</p>
+                            <p>{{ chat.item.name }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

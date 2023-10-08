@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}  {% endblock %} | Puddle</title>
+</head>
+<body>
+    <nav class="p-6 flex justify-between items-center flex-wrap gap-y-2 border-b border-gray-200">
+        <a href="/" class="text-2xl font-semibold">Puddle</a>
+        <div class="flex flex-wrap flex gap-3 items-center">
+            <a href="{% url 'item:browse' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                Browse Catalogue
+            </a>
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'chat:inbox' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    Inbox
+                </a>
+                <a href="{% url 'dashboard:dashboard' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    My Dashboard
+                </a>
+                <a href="{% url 'item:new_item' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    Sell Item
+                </a>
+                    <!-- <div class="text-right font-medium block">
+                        Welcome, {{ request.user.username }}!
+                    </div> -->
+                <a href="{% url 'core:logout' %}" class="px-3 py-2 text-md font-medium bg-yellow-500 text-white rounded-xl hover:bg-yellow-700">
+                    Logout as {{ request.user.username }} 
+                </a>
+
+            {% else %}
+                <a href="{% url 'core:signup' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    Sign Up
+                </a>
+                <a href="{% url 'core:login' %}" class="px-4 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">
+                    Login
+                </a>
+            {% endif %}
+
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <footer class="p-6 flex justify-between bg-gray-800">
+        <div class="w-2/3 pr-10">
+            <h3 class="mb-5 font-semibold text-gray-400">
+                About
+            </h3>
+            <p class="text-lg text-gray-500">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae natus veritatis eaque! Et vel eligendi perferendis tenetur id, illum alias animi officia, amet sit aperiam modi a minima veritatis quia.
+            </p>
+        </div>
+        <div class="w-1/3">
+            <h3 class="mb-5 font-semibold text-gray-400">
+                Menu
+            </h3>
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="text-base text-teal-500 hover:text-teal-700">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-base text-teal-500 hover:text-teal-700">
+                        Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-base text-teal-500 hover:text-teal-700">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-base text-teal-500 hover:text-teal-700">
+                        Tearms Of Use
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

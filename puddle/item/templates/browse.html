@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Browse {% endblock %}
+
+{% block content %}
+    <div class="p-4 grid gap-4 bg-gray-100 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+        <div class="col-span-1 max-h-screen overflow-y-auto text-center sm:text-left">
+            <form method="get" action=".">
+                <input name="query" class="w-full py-4 px-6 rounded-xl" type="text" value="{{ query }}" placeholder="Find clothing apperal, toys and more..">
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+            </form>
+            <hr class="my-6">
+            <p class="font-semibold pb-4"> Categories </p>
+            <ul>
+                {% for category in categories %}
+                    <li class="p-2 rounded-xl {% if category.id == category_id %} bg-pink-200 font-medium {% endif %}">
+                        <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category.id }}&order={{ order }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr class="my-6">
+            <p class="font-semibold pb-4"> Sort Items </p>
+            <ul>
+                <li class="p-2 rounded-xl {% if order == 'price' %} bg-pink-200 font-medium {% endif %}">
+                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=price">Cheapest First</a>
+                </li>
+                <li class="p-2 rounded-xl {% if order == '-price' %} bg-pink-200 font-medium {% endif %}">
+                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=-price">Expensive First</a>
+                </li>
+                <li class="p-2 rounded-xl {% if order == '-created_at' %} bg-pink-200 font-medium {% endif %}">
+                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=-created_at">Newest First</a>
+                </li>
+                <li class="p-2 rounded-xl {% if order == 'created_at' %} bg-pink-200 font-medium {% endif %}">
+                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=created_at">Oldest First</a>
+                </li>
+            </ul>
+            <a href="{% url 'item:browse' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Reset Filters</a>
+        </div>
+        {% if not items %}
+            <div class="m-5 text-xl font-medium">No Matches Found.</div>
+        {% endif %}
+        <div class="lg:col-span-3  md:col-span-2  sm:col-span-1 max-h-screen overflow-y-auto">
+            <div class="grid gap-x-6 gap-y-8 items-center justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+                
+                {% for item in items %}
+                    <div class="shadow-xl rounded-xl text-center border-4 border-transparent hover:border-4 hover:border-pink-400 hover:rounded-xl">
+                        <a href="{% url 'item:detail' item.id %}">
+                            <div>
+                                <img src="{{ item.image.url}}" class="rounded-t-xl object-scale-down h-96 w-96">
+                            </div>
+                            <div class="p-6 bg-teal-100 rounded-b-xl">
+                                <h2 class="text-2xl"> {{item.name}} </h2>
+                                <p class="text-gray-500 font-medium text-lg"> ₹ {{item.price}} </p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+{% endblock %}
