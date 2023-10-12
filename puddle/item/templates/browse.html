@@ -22,16 +22,16 @@
             <p class="font-semibold pb-4"> Sort Items </p>
             <ul>
                 <li class="p-2 rounded-xl {% if order == 'price' %} bg-pink-200 font-medium {% endif %}">
-                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=price">Cheapest First</a>
+                    <a href="{% url 'item:browse' %}?query={{ query }}{% if category_id != 0 %}&category={{ category_id }}{% endif %}&order=price">Cheapest First</a>
                 </li>
                 <li class="p-2 rounded-xl {% if order == '-price' %} bg-pink-200 font-medium {% endif %}">
-                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=-price">Expensive First</a>
+                    <a href="{% url 'item:browse' %}?query={{ query }}{% if category_id != 0 %}&category={{ category_id }}{% endif %}&order=-price">Expensive First</a>
                 </li>
                 <li class="p-2 rounded-xl {% if order == '-created_at' %} bg-pink-200 font-medium {% endif %}">
-                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=-created_at">Newest First</a>
+                    <a href="{% url 'item:browse' %}?query={{ query }}{% if category_id != 0 %}&category={{ category_id }}{% endif %}&order=-created_at">Newest First</a>
                 </li>
                 <li class="p-2 rounded-xl {% if order == 'created_at' %} bg-pink-200 font-medium {% endif %}">
-                    <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category_id }}&order=created_at">Oldest First</a>
+                    <a href="{% url 'item:browse' %}?query={{ query }}{% if category_id != 0 %}&category={{ category_id }}{% endif %}&order=created_at">Oldest First</a>
                 </li>
             </ul>
             <a href="{% url 'item:browse' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Reset Filters</a>
