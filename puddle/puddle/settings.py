@@ -1,6 +1,6 @@
 """
 admin
-puddleadmin
+puddleadmin!
 
 maxfashion
 Max12345678!
@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-7gnqd+4a=&9093f4d*)hn)21iq@5%4gj!(!923gq!-$ahp5^v!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.225.231','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.225.231','localhost', '0.0.0.0']
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
