@@ -49,6 +49,6 @@ This project was initially inspired by a YouTube tutorial by CodeWithStein[\[lin
 
 ## Steps to run Dockerfile
 - setup docker desktop
-- in project directory run this command on terminal
-    - docker build -t my-django-app .
-    - docker run -p 8000:8000 my-django-app
+### run the following commands in the project directory
+    - `docker build -t my-django-app .`
+    - `docker run -p 8000:8000 my-django-app`
