@@ -1,12 +1,11 @@
 [[source]]
+name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pypi"
 
 [packages]
-django = "*"
-
-[dev-packages]
+django = "*"  # Replace "*" with your Django version if needed
+Pillow = "*"  # Replace "*" with the desired Pillow version
 
 [requires]
 python_version = "3.11"

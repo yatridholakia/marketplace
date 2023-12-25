@@ -45,3 +45,10 @@ This project was initially inspired by a YouTube tutorial by CodeWithStein[\[lin
 - HTML: Frontend markup
 - SQLite: Database
 - Tailwind CSS: Styling
+
+
+## Steps to run Dockerfile
+- setup docker desktop
+### run the following commands in the project directory
+    - `docker build -t my-django-app .`
+    - `docker run -p 8000:8000 my-django-app`
